@@ -1,0 +1,36 @@
+.mat-mdc-form-field {
+    margin-right: 4px;
+  }
+  nav {
+    display: flex;
+    width: 80%;
+    padding-left: 10%;
+    padding-right: 10%;
+    box-shadow: 1px 1px 8px grey;
+    background-color: white;
+    position: sticky;
+    height: 6.4vh;
+    line-height: 7vh;
+}
+    nav  > a {
+      font-size: 25px;
+      color: #c2185b;
+      text-decoration: none;
+      box-sizing: border-box;
+      text-align: center;
+      margin: auto;
+      padding: inherit;
+      margin-bottom: 0;
+  }
+  body {
+    background-color: rgb(242,242,246);
+}
+nav  > a:hover {
+    border-bottom: solid 2px #c2185b;
+}
+
+
+
+
+
+

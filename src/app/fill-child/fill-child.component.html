@@ -1,0 +1,45 @@
+<form (ngSubmit)="loginChild(myForm) "  #myForm="ngForm">
+ 
+ <mat-form-field appearance="fill"> 
+    <mat-label>שם פרטי</mat-label>
+    <input type="text" matInput [formControl]="nameFormControl" [errorStateMatcher]="matcher"
+    placeholder="הכנס שם פרטי" [(ngModel)]='child.Name'>
+<!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+<mat-error *ngIf=" nameFormControl.hasError('pattern')">
+!נא הכנס שם באותיות בלבד
+</mat-error>
+<mat-error *ngIf="nameFormControl.hasError('required')">
+ שם פרטי הוא <strong>שדה חובה </strong>  
+</mat-error>
+   </mat-form-field><br>
+   <!-- ------------------------------------------ -->
+   <mat-form-field appearance="fill"> 
+    <mat-label>תעודת זהות</mat-label>
+    <input type="text" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher" [(ngModel)]='child.IdNumber'
+    placeholder="הכנס סיסמא" >
+<!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+<mat-error *ngIf=" passwordFormControl.hasError('pattern')">
+תעודת זהות צריכה להכיל ספרות בלבד
+</mat-error>
+  <mat-error *ngIf=" passwordFormControl.hasError('maxlength')||passwordFormControl.hasError('minlength')">
+    תעודת זהות צריכה להכיל 9 ספרות בדיוק
+    </mat-error>
+<mat-error *ngIf="passwordFormControl.hasError('required')">
+ תעודת זהות הוא <strong>שדה חובה </strong>  
+</mat-error>
+   </mat-form-field><br>
+   <!-- -------------------------------------- -->
+   <mat-form-field appearance="fill">
+    <mat-label>{{d}}</mat-label>
+    <input matInput [matDatepicker]="dp3" disabled  (dateInput)="addEvent( $event)" (dateChange)="addEvent( $event)">
+    <mat-datepicker-toggle  matIconSuffix [for]="dp3" ></mat-datepicker-toggle>
+    <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+  </mat-form-field>
+   <!-- -------------------------------------- -->
+      <input type="text" name="name" id="name" required pattern="^[ a-zA-Zא-ת]*$" placeholder="הכנס  שם" [(ngModel)]="child.Name" style="display: none;"/><br/>
+      
+      <input type="text" name="password" id="password"  pattern="^[0-9]*$" required minlength="9" maxlength="9"  placeholder="הכנס  סיסמא" [(ngModel)]="child.IdNumber" style="display: none;"/>
+      <input type="date" name="date" id="date" required placeholder="הכנס  סיסמא" [(ngModel)]="child.DOB" style="display: none;"/>
+      
+      <input *ngIf="!update" class="button" type="submit" [disabled]="!myForm.valid" value="שלח"/>
+        </form>

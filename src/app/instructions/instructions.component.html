@@ -1,0 +1,29 @@
+<div id="form" style="
+    border: 2px solid #c2185b;
+    color: #4a4a4a;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 10vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  " >
+<!-- <h2 *ngIf="userName!=null" style="text-align: center;">  
+שלום {{userName}}  
+</h2> -->
+<h2 *ngIf="userName!=null" style="text-align: center;">  
+  שלום {{userSer.currentU ["FirstName"]}}   {{userSer.currentU ["LastName"]}}  
+  </h2>
+<h2 *ngIf="userName==null" style="text-align: center;">  
+ שלום 
+  </h2>
+<ul type="none" style="text-align: center;padding: 0; margin: 10px;">
+    <h3>:הוראות למילוי הפרטים</h3>
+<li>יש להכניס שם פרטי המכיל אותיות ו/או רווחים בלבד</li>
+<li>יש להכניס שם משפחה המכיל אותיות ו/או רווחים בלבד</li>
+<li>יש להכניס תעודת זהות המכילה 9 ספרות בלבד</li>
+<li>יש לבחור תאריך לידה</li>
+<li>יש לבחור מין (הבחירה ברירת מחדל היא זכר יש לשנות לפי הצורך)</li>
+<li>יש לבחור קופת חולים (הבחירה ברירת מחדל היא מכבי יש לשנות לפי הצורך)</li>
+<li>!!!יש להכניס את פרטי הילדים לאחר ההכנסה לא ניתן לשנות</li>
+<li id="link" style="color: blue; " (click)="logout()">ליציאה מהחשבון לחץ כאן</li>
+</ul>
+</div>

@@ -1,0 +1,124 @@
+<form id="form" (ngSubmit)="login(myForm)" style=" margin-left: auto;margin-right: auto; margin-top: 10 vh; z-index: -1;"  #myForm="ngForm">
+
+<mat-form-field  appearance="fill" > 
+    <mat-label>שם פרטי</mat-label>
+    <input  type="text" matInput [formControl]="nameFormControl" [errorStateMatcher]="matcher"
+    placeholder="הכנס שם פרטי" [(ngModel)]='userS.currentU["FirstName"]' >
+<!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+<mat-error *ngIf=" nameFormControl.hasError('pattern')">
+!נא הכנס שם באותיות בלבד
+</mat-error>
+<mat-error *ngIf="nameFormControl.hasError('required')">
+ שם פרטי הוא <strong>שדה חובה </strong>  
+</mat-error>
+   </mat-form-field><br>
+   <!-- -------------------------------------- -->
+   <mat-form-field appearance="fill"> 
+    <mat-label>שם משפחה</mat-label>
+    <input type="text" matInput [formControl]="nameFormControl2" [errorStateMatcher]="matcher" [(ngModel)]='userS.currentU["LastName"]' 
+    placeholder="הכנס שם משפחה" >
+<!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+<mat-error *ngIf=" nameFormControl2.hasError('pattern')">
+!נא הכנס שם באותיות בלבד
+</mat-error>
+<mat-error *ngIf="nameFormControl2.hasError('required')">
+ שם משפחה הוא <strong>שדה חובה </strong>  
+</mat-error>
+   </mat-form-field> <br>
+   <!-- -------------------------------------- -->
+   <mat-form-field appearance="fill"> 
+    <mat-label>תעודת זהות</mat-label>
+    <input type="text" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher" [(ngModel)]='userS.currentU ["IdNumber"]'
+    placeholder="הכנס סיסמא" >
+<!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+<mat-error *ngIf=" passwordFormControl.hasError('pattern')">
+תעודת זהות צריכה להכיל ספרות בלבד
+</mat-error>
+  <mat-error *ngIf=" passwordFormControl.hasError('maxlength')||passwordFormControl.hasError('minlength')">
+    תעודת זהות צריכה להכיל 9 ספרות בדיוק
+    </mat-error>
+<mat-error *ngIf="passwordFormControl.hasError('required')">
+ תעודת זהות הוא <strong>שדה חובה </strong>  
+</mat-error>
+   </mat-form-field><br>
+   <!-- -------------------------------------- -->
+    
+   <mat-form-field appearance="fill">
+    <!-- <mat-label>תאריך לידה</mat-label> -->
+    <mat-label>{{d}}</mat-label>
+
+    <input  matInput [matDatepicker]="dp3" disabled  (dateInput)="addEvent( $event)" (dateChange)="addEvent( $event)">
+    <!-- <h1>{{user.DOB}}</h1> -->
+    <mat-datepicker-toggle  matIconSuffix [for]="dp3"  ></mat-datepicker-toggle>
+    <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+  </mat-form-field><br>
+<!-- -------------------------------------- -->
+<mat-form-field appearance="fill">
+    <mat-label>מין</mat-label>
+    <mat-select [(value)]='userS.currentU ["gender"]'>
+      <mat-option value="זכר">זכר</mat-option>
+      <mat-option value="נקבה">נקבה</mat-option>
+    </mat-select>
+  </mat-form-field><br>
+     <!-- -------------------------------------- -->
+  <mat-form-field appearance="fill">
+    <mat-label>קופת חולים</mat-label>
+    <mat-select [(value)]="userS.currentU ['HOM']" >
+      <mat-option value="מאוחדת">מאוחדת</mat-option>
+      <mat-option value="מכבי">מכבי</mat-option>
+      <mat-option value="כללית">כללית</mat-option>
+      <mat-option value="לאומית">לאומית</mat-option>
+    </mat-select>
+  </mat-form-field><br>
+       <!-- -------------------------------------- -->
+
+
+
+<input id="button1" style="cursor: pointer" type="button" value="הוסף ילד" (click)="addChild()"/><br>
+
+
+
+<div *ngFor="let x of  userS.currentU ['Children']" style="padding-top: 20px; width: 450px;margin: auto; border:  1px solid rgb(105, 119, 116);">
+<app-fill-child style="margin: 5px;text-align: center; " [child]="x"></app-fill-child>
+</div>
+<div id="divbutton">
+<input class="button" style="cursor: pointer" type="button" value="הורד קובץ" (click)="exportexcel()"/>
+<input class="button" style="cursor: pointer" type="submit" [disabled]="!myForm.valid || !IsFullChild()" value="שלח"/>
+<input class="button" style="cursor: pointer" type="button" value="שמור" (click)="save()"/>
+</div>
+
+
+
+<input type="text" name="name1" id="name1" required pattern="^[ a-zA-Zא-ת]*$" placeholder="הכנס  שם" [(ngModel)]="userS.currentU ['FirstName']" style="display: none;"/><br/>
+<input type="text" name="name2" id="name2" required pattern="^[ a-zA-Zא-ת]*$" placeholder="הכנס  שם" [(ngModel)]="userS.currentU ['LastName']" style="display: none;"/><br/>
+
+<input type="text" name="password" id="password" pattern="^[0-9]*$" required minlength="9" maxlength="9" placeholder="הכנס  סיסמא" [(ngModel)]="userS.currentU ['IdNumber']" style="display: none;"/>
+<input type="date" name="date" id="date" required placeholder="הכנס  סיסמא" [(ngModel)]="userS.currentU ['DOB']" style="display: none;"/>
+
+</form>
+<!-- <a style="cursor: pointer" >
+  <mat-icon> cloud_download</mat-icon>
+</a> -->
+
+
+<table id="excel-table" style="display: none;"> 
+  <tr>       
+     <th>שם פרטי</th>  
+     <th> שם משפחה</th>
+     <th> תעודת זהות </th>  
+     <th>תאריך לידה</th>  
+     <th> מין </th> 
+     <th> קופת חולים </th> 
+     <th> מספר ילדים </th> 
+
+  </tr >    
+  <tr >
+     <td>{{userS.currentU["FirstName"]}}</td>  
+     <td>{{userS.currentU["LastName"]}}</td>  
+     <td>{{userS.currentU ["IdNumber"]}}</td>  
+     <td>{{userS.currentU["DOB"]}}</td>  
+     <td>{{userS.currentU ["gender"]}}</td>  
+     <td>{{userS.currentU["HOM"]}}</td>  
+     <td>{{numOfChild()}}</td>  
+  </tr> 
+</table>

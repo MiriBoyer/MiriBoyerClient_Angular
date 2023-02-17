@@ -1,0 +1,73 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  mat-form-field {
+    margin-left: 8px;
+     width: 420px;
+  }
+  .mat-mdc-form-field {
+    margin-right: 4px;
+  }
+   
+  section {
+    display: table;
+  }
+  
+  .example-label {
+    display: table-cell;
+    font-size: 14px;
+    margin-left: 8px;
+    min-width: 120px;
+  }
+  
+  .example-button-row {
+    display: table-cell;
+    max-width: 600px;
+  }
+  
+  .example-button-row .mat-mdc-button-base {
+    margin: 8px 8px 8px 0;
+  }
+  section {
+    display: table;
+  }
+  
+  .example-label {
+    display: table-cell;
+    font-size: 14px;
+    margin-left: 8px;
+    min-width: 120px;
+  }
+  
+  .example-button-row {
+    display: table-cell;
+    max-width: 600px;
+  }
+  
+  .example-button-row .mat-mdc-button-base {
+    margin: 8px 8px 8px 0;
+  }
+  
+  .example-flex-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .example-button-container {
+    display: flex;
+    justify-content: center;
+    width: 120px;
+  }
+  .button{
+    background-color:  #c9c9c9;
+   flex: 1;
+   width: 25%;
+    opacity: 70%;
+    border-radius: 3px;
+    height: 30px;
+    margin: 15px;    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   
+   }
