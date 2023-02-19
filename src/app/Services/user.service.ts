@@ -11,51 +11,44 @@ import { User } from "../Model/User";
 
 export class UserService{
 constructor(public http: HttpClient) { }
+open:boolean=false;
 countChild:number=0;
-uu:User[];
-// currentU=new BehaviorSubject<{Id:number,FirstName :string ,LastName :string, Password:string , DOB:Date  ,  Gender:string,  HOM :string,  Children: Array<Child>}>(null);
-currentU=new BehaviorSubject<User>
-({Id:-1,FirstName:"",LastName:"",IdNumber:"",DOB:null,gender:"",HOM:"",Children: []});
-  baseRouteUrl = `${environment.baseUrl}User`
+currentU=new BehaviorSubject<User>({Id:-1,FirstName:"",LastName:"",IdNumber:"",DOB:null,gender:"",HOM:"",Children: []});
+baseRouteUrl = `${environment.baseUrl}User`
 
   getAllUsers() {
     return this.http.get<User[]>(this.baseRouteUrl);
   }
   getUserById(id:number) {
-    return this.http.get<User>(`${this.baseRouteUrl}/GetById/${id}`);
+    return this.http.get<User>(`${this.baseRouteUrl}//${id}`);
   }
   addUser() {
     var o= this.http.post<User>(this.baseRouteUrl,this.currentU).subscribe(
       (succ)=>{console.log(succ)},
       (err) => { 
-        // console.log('err', err); 
         console.log('-------------------------------------------------------------------------');
         console.log("Error all the fields are required but you didn't fill well all of them!!!");
         console.log('-------------------------------------------------------------------------');
       });
-    
   }
   updateUser(id:number, user: User) {
-    return this.http.put<User>(`${this.baseRouteUrl}/Put/${id}`, user);
+    return this.http.put<User>(`${this.baseRouteUrl}/${id}`, user);
   }
   removeUser(id:number){
-    return this.http.delete<User>(`${this.baseRouteUrl}/Delete/${id}`);
+    return this.http.delete<User>(`${this.baseRouteUrl}/${id}`);
   }
+
   setInStorage(user){
     localStorage.setItem("currentU",JSON.stringify(user));
   }
   removeFromStoreage(){
     localStorage.removeItem("currentU");
   }
-  getNameFromStorage(){
-    console.log(this.getFromStorage());
-    console.log(this.getFromStorage()[1]);
-    this.getFromStorage()[1];
-  }
   getFromStorage(){
     let u=localStorage.getItem("currentU")
-    return u==null?null:JSON.parse(u);
+    return u==null? new BehaviorSubject<User>({Id:-1,FirstName:"",LastName:"",IdNumber:"",DOB:null,gender:"",HOM:"",Children: []}) :JSON.parse(u);
   }
+
   logout(){
     this.removeFromStoreage();
     this.currentU=new BehaviorSubject<User>

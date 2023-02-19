@@ -14,9 +14,7 @@ import { UserService } from '../Services/user.service';
 })
 export class FillChildComponent implements ErrorStateMatcher {
 
-constructor(
-  // public childS:ChildSer,
-  public userSer:UserService){}
+constructor(public userSer:UserService){}
   nameFormControl = new FormControl('', [Validators.required,Validators.pattern("^[ a-zA-Zא-ת]*$")]);
   passwordFormControl = new FormControl('', [Validators.required,Validators.pattern("^[0-9]*$") ,Validators.maxLength(9), Validators.minLength(9)]);
   dateFormControl = new FormControl('', [Validators.required,Validators.pattern(/^(0?[1-9]|1[0-2])[\/](0?[1-9]|[1-2][0-9]|3[01])[\/]\d{4}$/)]);
@@ -25,11 +23,6 @@ constructor(
   child:Child;
   d:string;
    update:boolean;
-// //הוספת ילד למערך של האבא
-// addChild(){
-//   this.userS.currentU["Children"]   .push(new Child(0,"","",null));
-// }
-
 ngOnInit() {
   this.update=this.child.Id==0?true:false;
   if(this.child!=null){
@@ -37,7 +30,6 @@ ngOnInit() {
   }
   if(this.d==null){    this.d="תאריך לידה";}
 }
-
    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
       const isSubmitted = form && form.submitted;
       return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
@@ -46,9 +38,6 @@ ngOnInit() {
 loginChild(c){
 this.update=true;
 this.d="תאריך לידה";
-//let user=this.userSer.getFromStorage();
-//user.Children.push(this.child);
-//console.log(user);
 this.child.Id=0;
 this.userSer.countChild++;
 this.userSer.setInStorage(this.userSer.currentU);
@@ -59,7 +48,6 @@ addEvent( event: MatDatepickerInputEvent<Date>) {
   this.child.DOB=event.value;
 }
 }
-
 // ___________________________________________________________________
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {

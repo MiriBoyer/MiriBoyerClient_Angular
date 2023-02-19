@@ -10,24 +10,21 @@ import { Child } from "../Model/Child";
 
 export class ChildService{
 constructor(public http: HttpClient) { }
-  baseRouteUrl = `${environment.baseUrl}/Child`
+  baseRouteUrl = `${environment.baseUrl}Child`
 
   getAllChildren() {
-    return this.http.get<Child[]>(`${this.baseRouteUrl}/Get`);
+    return this.http.get<Child[]>(`${this.baseRouteUrl}/`);
   }
   getChildById(id:number) {
-    return this.http.get<Child>(`${this.baseRouteUrl}/GetById/${id}`);
+    return this.http.get<Child>(`${this.baseRouteUrl}/${id}`);
   }
-  // getChildByParentId(id:number) {
-  //   return this.http.get<Child>(`${this.baseRouteUrl}/getChildByParentId/${id}`);
-  // }
   addChild(c:Child) {
-    return this.http.post<Child>(`${this.baseRouteUrl}/post`,c);
+    return this.http.post<Child>(`${this.baseRouteUrl}/`,c);
   }
   updateChild(id:number, child: Child) {
-    return this.http.put<Child>(`${this.baseRouteUrl}/Put/${id}`, child);
+    return this.http.put<Child>(`${this.baseRouteUrl}/${id}`, child);
   }
   delete(id:number) {
-    return this.http.delete<Child>(`${this.baseRouteUrl}/Delete/${id}`);
+    return this.http.delete<Child>(`${this.baseRouteUrl}/${id}`);
   }
 }

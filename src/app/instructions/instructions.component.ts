@@ -11,7 +11,6 @@ export class InstructionsComponent implements OnInit {
 constructor(public userSer:UserService){}
   ngOnInit() {
     this.userName=this.userSer?.currentU["FirstName"]+" "+this.userSer?.currentU["LastName"]
-    //this.userSer.currentU.subscribe(d=>{this.userName=d?.FirstName+" "+d?.LastName});
   }
   logout(){
     this.userSer.logout();

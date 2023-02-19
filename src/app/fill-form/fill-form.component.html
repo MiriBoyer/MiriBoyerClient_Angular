@@ -1,10 +1,9 @@
-<form id="form" (ngSubmit)="login(myForm)" style=" margin-left: auto;margin-right: auto; margin-top: 10 vh; z-index: -1;"  #myForm="ngForm">
+<form id="form" (ngSubmit)="login(myForm)" style=" margin-left: auto;margin-right: auto; margin-top: 10 vh; z-index: -1; direction: rtl;"  #myForm="ngForm">
 
 <mat-form-field  appearance="fill" > 
     <mat-label>שם פרטי</mat-label>
     <input  type="text" matInput [formControl]="nameFormControl" [errorStateMatcher]="matcher"
     placeholder="הכנס שם פרטי" [(ngModel)]='userS.currentU["FirstName"]' >
-<!-- <mat-hint>Errors appear instantly!</mat-hint> -->
 <mat-error *ngIf=" nameFormControl.hasError('pattern')">
 !נא הכנס שם באותיות בלבד
 </mat-error>
@@ -17,7 +16,6 @@
     <mat-label>שם משפחה</mat-label>
     <input type="text" matInput [formControl]="nameFormControl2" [errorStateMatcher]="matcher" [(ngModel)]='userS.currentU["LastName"]' 
     placeholder="הכנס שם משפחה" >
-<!-- <mat-hint>Errors appear instantly!</mat-hint> -->
 <mat-error *ngIf=" nameFormControl2.hasError('pattern')">
 !נא הכנס שם באותיות בלבד
 </mat-error>
@@ -30,7 +28,6 @@
     <mat-label>תעודת זהות</mat-label>
     <input type="text" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher" [(ngModel)]='userS.currentU ["IdNumber"]'
     placeholder="הכנס סיסמא" >
-<!-- <mat-hint>Errors appear instantly!</mat-hint> -->
 <mat-error *ngIf=" passwordFormControl.hasError('pattern')">
 תעודת זהות צריכה להכיל ספרות בלבד
 </mat-error>
@@ -42,20 +39,16 @@
 </mat-error>
    </mat-form-field><br>
    <!-- -------------------------------------- -->
-    
-   <mat-form-field appearance="fill">
-    <!-- <mat-label>תאריך לידה</mat-label> -->
-    <mat-label>{{d}}</mat-label>
-
-    <input  matInput [matDatepicker]="dp3" disabled  (dateInput)="addEvent( $event)" (dateChange)="addEvent( $event)">
-    <!-- <h1>{{user.DOB}}</h1> -->
+   <mat-form-field appearance="fill" >
+    <mat-label style="margin-right: 15px;">   {{d}}   </mat-label>
+    <input matInput [matDatepicker]="dp3" disabled  (dateInput)="addEvent( $event)" (dateChange)="addEvent( $event)">
     <mat-datepicker-toggle  matIconSuffix [for]="dp3"  ></mat-datepicker-toggle>
     <mat-datepicker #dp3 disabled="false"></mat-datepicker>
   </mat-form-field><br>
 <!-- -------------------------------------- -->
-<mat-form-field appearance="fill">
+<mat-form-field appearance="fill" >
     <mat-label>מין</mat-label>
-    <mat-select [(value)]='userS.currentU ["gender"]'>
+    <mat-select  [(value)]='userS.currentU ["gender"]'>
       <mat-option value="זכר">זכר</mat-option>
       <mat-option value="נקבה">נקבה</mat-option>
     </mat-select>
@@ -96,9 +89,6 @@
 <input type="date" name="date" id="date" required placeholder="הכנס  סיסמא" [(ngModel)]="userS.currentU ['DOB']" style="display: none;"/>
 
 </form>
-<!-- <a style="cursor: pointer" >
-  <mat-icon> cloud_download</mat-icon>
-</a> -->
 
 
 <table id="excel-table" style="display: none;"> 

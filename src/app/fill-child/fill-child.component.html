@@ -1,10 +1,8 @@
-<form (ngSubmit)="loginChild(myForm) "  #myForm="ngForm">
- 
+<form (ngSubmit)="loginChild(myForm) "  #myForm="ngForm" style="direction: rtl;">
  <mat-form-field appearance="fill"> 
     <mat-label>שם פרטי</mat-label>
     <input type="text" matInput [formControl]="nameFormControl" [errorStateMatcher]="matcher"
     placeholder="הכנס שם פרטי" [(ngModel)]='child.Name'>
-<!-- <mat-hint>Errors appear instantly!</mat-hint> -->
 <mat-error *ngIf=" nameFormControl.hasError('pattern')">
 !נא הכנס שם באותיות בלבד
 </mat-error>
@@ -17,7 +15,6 @@
     <mat-label>תעודת זהות</mat-label>
     <input type="text" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher" [(ngModel)]='child.IdNumber'
     placeholder="הכנס סיסמא" >
-<!-- <mat-hint>Errors appear instantly!</mat-hint> -->
 <mat-error *ngIf=" passwordFormControl.hasError('pattern')">
 תעודת זהות צריכה להכיל ספרות בלבד
 </mat-error>
@@ -30,7 +27,7 @@
    </mat-form-field><br>
    <!-- -------------------------------------- -->
    <mat-form-field appearance="fill">
-    <mat-label>{{d}}</mat-label>
+    <mat-label  style="margin-right: 15px;">{{d}}</mat-label>
     <input matInput [matDatepicker]="dp3" disabled  (dateInput)="addEvent( $event)" (dateChange)="addEvent( $event)">
     <mat-datepicker-toggle  matIconSuffix [for]="dp3" ></mat-datepicker-toggle>
     <mat-datepicker #dp3 disabled="false"></mat-datepicker>
